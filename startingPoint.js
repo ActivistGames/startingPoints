@@ -163,7 +163,7 @@ function drawProjectInfo() {
   yOffset += lineHeight;
   yOffset = drawText("Osoby uczestniczące w zajęciach korzystały z wiedzy zdobytej w trakcie konwersatorium i warsztatów, a także z inspiracji zebranych samodzielnie oraz zaproponowanych przez prowadzących zajęcia.", xOffset, yOffset, textBoxWidth);
   
-  yOffset += lineHeight * 1.5;
+  yOffset += lineHeight * 2;
   textSize(20);
   text("Zasady", xOffset, yOffset);
   
