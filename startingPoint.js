@@ -1,4 +1,5 @@
 let buttons = [];
+let particles = [];
 
 let posX = 300;
 let posY = 50;
@@ -35,11 +36,16 @@ function setup() {
   buttons.push(new Button(posX, shiftY+(posY+marg)*4, '5 etapów żałoby', 'https://aszulcc.github.io/title-screen'));
   buttons.push(new Button(posX, shiftY+(posY+marg)*5, 'Dark patterns', 'https://glink-182.github.io/first-page'));
   buttons.push(new Button(posX, shiftY+(posY+marg)*6, 'Formularz imigracyjny', 'https://kacperrrrr5.github.io/imigrant-witamy'));
-  buttons.push(new Button(posX, shiftY+(posY+marg)*8, 'School of Form experience', 'https://jakubzawadzkiswps.github.io/School-of-Forms'));
+  buttons.push(new Button(posX, shiftY+(posY+marg)*8, 'School of Forms', 'https://jakubzawadzkiswps.github.io/School-of-Forms'));
+  
+  for (let i = 0; i < 50; i++) {
+    particles.push(new Particle());
+  }
 }
 
 function draw() {
   background(eerieBlack);
+  
   over = 0;
 
   for (let btn of buttons) {
@@ -83,6 +89,12 @@ function draw() {
 
   stroke(corneliRed);
   line(width/2-130, 90, width/2+130, 90);
+  
+  
+  for (let particle of particles) {
+    particle.update();
+    particle.display();
+  }
 }
 
 class Button {
@@ -133,5 +145,48 @@ class Button {
 
     text(this.txt, this.x, this.y-3);
     pop();
+  }
+}
+
+
+
+class Particle {
+  constructor() {
+    this.position = createVector(random(width), random(height));
+    this.velocity = createVector(random(-1, 1), random(-1, 1));
+    this.size = random(2, 6);
+    this.color = color(random([beige, lightBlue, lapisLazuli,corneliRed]));
+    this.maxSpeed = random(1, 2);
+    this.acceleration = 0.05;
+  }
+  
+  update() {
+    this.position.add(this.velocity);
+    
+    if (this.position.x < 0 || this.position.x > width) {
+      this.velocity.x *= -0.7; // Zmniejszamy prędkość o 20% przy odbiciu
+      this.position.x = constrain(this.position.x, 0, width);
+    }
+    if (this.position.y < 0 || this.position.y > height) {
+      this.velocity.y *= -0.7; // Zmniejszamy prędkość o 20% przy odbiciu
+      this.position.y = constrain(this.position.y, 0, height);
+    }
+    
+    // Stopniowo przyspieszamy cząsteczkę do jej maksymalnej prędkości
+    this.velocity.setMag(min(this.velocity.mag() + this.acceleration, this.maxSpeed));
+    
+    let mouseDistance = dist(mouseX, mouseY, this.position.x, this.position.y);
+    if (mouseDistance < 100) {
+      let repelForce = p5.Vector.sub(this.position, createVector(mouseX, mouseY));
+      repelForce.setMag(0.5);
+      this.velocity.add(repelForce);
+      this.velocity.limit(this.maxSpeed);
+    }
+  }
+  
+  display() {
+    noStroke();
+    fill(this.color);
+    ellipse(this.position.x, this.position.y, this.size);
   }
 }
