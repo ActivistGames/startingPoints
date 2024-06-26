@@ -5,6 +5,8 @@ let posY = 50;
 let marg = 15;
 let shiftY = 180;
 
+let over = 0;
+
 let latoReg;
 let latoBold;
 
@@ -28,9 +30,8 @@ function setup() {
   eerieBlack = color(38, 38, 38);
   corneliRed = color(179, 0, 27);
 
-
-  buttons.push(new Button(posX, shiftY+posY+marg, 'Skrzynka z tajemnicami', 'http://example.com/1'));
-  buttons.push(new Button(posX, shiftY+(posY+marg)*2, 'Connect the dots', 'http://example.com/2'));
+  buttons.push(new Button(posX, shiftY+posY+marg, 'Skrzynka z tajemnicami', ''));
+  buttons.push(new Button(posX, shiftY+(posY+marg)*2, 'Connect the dots', ''));
   buttons.push(new Button(posX, shiftY+(posY+marg)*4, '5 etapów żałoby', 'https://aszulcc.github.io/title-screen'));
   buttons.push(new Button(posX, shiftY+(posY+marg)*5, 'Dark patterns', 'https://glink-182.github.io/first-page'));
   buttons.push(new Button(posX, shiftY+(posY+marg)*6, 'Formularz imigracyjny', 'https://kacperrrrr5.github.io/imigrant-witamy'));
@@ -39,11 +40,23 @@ function setup() {
 
 function draw() {
   background(eerieBlack);
+  over = 0;
+
   for (let btn of buttons) {
     btn.display();
-    if (btn.checkCursor() && mouseIsPressed) {
-      window.location.href = btn.url;
-      //print(btn.url);
+
+    if (btn.checkCursor() == true && btn.url != '') {
+      over++;
+      if (mouseIsPressed ) {
+        window.location.href = btn.url;
+        //print(btn.url);
+      }
+    }
+
+    if (over>0) {
+      cursor(HAND);
+    } else {
+      cursor(ARROW);
     }
   }
   textAlign(CENTER, CENTER);
@@ -67,9 +80,9 @@ function draw() {
   line(700, shiftY+marg, width-700, shiftY+marg);
   line(700, shiftY+(posY+marg)*3+marg, width-700, shiftY+(posY+marg)*3+marg);
   line(700, shiftY+(posY+marg)*7+marg, width-700, shiftY+(posY+marg)*7+marg);
-  
+
   stroke(corneliRed);
-  line(width/2-130,90,width/2+130,90);
+  line(width/2-130, 90, width/2+130, 90);
 }
 
 class Button {
@@ -107,6 +120,13 @@ class Button {
       fill(eerieBlack);
       rect(this.x-this.w/2, this.y-this.h/2, this.w, this.h, 18);
       fill(beige);
+    }
+
+    if (this.url == '') {
+      stroke(100);
+      fill(eerieBlack);
+      rect(this.x-this.w/2, this.y-this.h/2, this.w, this.h, 18);
+      fill(100);
     }
 
     noStroke();
