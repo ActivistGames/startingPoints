@@ -2,11 +2,17 @@ let buttons = [];
 
 let posX = 300;
 let posY = 50;
-let marg = 10;
+let marg = 15;
 let shiftY = 180;
 
 let latoReg;
 let latoBold;
+
+let beige;
+let lightBlue;
+let lapisLazuli;
+let eerieBlack;
+let corneliRed;
 
 function preload() {
   latoReg = loadFont('Lato/Lato-Regular.ttf');
@@ -15,44 +21,55 @@ function preload() {
 
 function setup() {
   createCanvas(1920, 1080);
-  
+  posX = width/2;
+  beige = color(204, 173, 143);
+  lightBlue = color(126, 163, 204);
+  lapisLazuli = color(37, 92, 153);
+  eerieBlack = color(38, 38, 38);
+  corneliRed = color(179, 0, 27);
+
+
   buttons.push(new Button(posX, shiftY+posY+marg, 'Skrzynka z tajemnicami', 'http://example.com/1'));
   buttons.push(new Button(posX, shiftY+(posY+marg)*2, 'Connect the dots', 'http://example.com/2'));
-  buttons.push(new Button(posX, shiftY+(posY+marg)*4, '5 etapów żałoby', 'http://example.com/3'));
-  buttons.push(new Button(posX, shiftY+(posY+marg)*5, 'Unsuscribe', 'http://example.com/4'));
-  buttons.push(new Button(posX, shiftY+(posY+marg)*6, 'Formularz migracyjny', 'http://example.com/5'));
-  buttons.push(new Button(posX, shiftY+(posY+marg)*8, 'School of Form experience', 'http://example.com/6'));
+  buttons.push(new Button(posX, shiftY+(posY+marg)*4, '5 etapów żałoby', 'https://aszulcc.github.io/title-screen'));
+  buttons.push(new Button(posX, shiftY+(posY+marg)*5, 'Dark patterns', 'https://glink-182.github.io/first-page'));
+  buttons.push(new Button(posX, shiftY+(posY+marg)*6, 'Formularz imigracyjny', 'https://kacperrrrr5.github.io/imigrant-witamy'));
+  buttons.push(new Button(posX, shiftY+(posY+marg)*8, 'School of Form experience', 'https://jakubzawadzkiswps.github.io/School-of-Forms'));
 }
 
 function draw() {
-  background(255);
+  background(eerieBlack);
   for (let btn of buttons) {
     btn.display();
     if (btn.checkCursor() && mouseIsPressed) {
-      //     window.location.href = btn.url;
-      print(btn.url);
+      window.location.href = btn.url;
+      //print(btn.url);
     }
   }
   textAlign(CENTER, CENTER);
   textFont(latoReg);
   noStroke();
-  fill(0);
+  fill(beige);
   textSize(30);
   text("Projektowanie interakcji", posX, 50);
-  text("Interaction design", posX, 100);
+  text("Interaction design", posX, 120);
 
-textFont(latoBold);
+  fill(lapisLazuli);
+  textFont(latoBold);
   textAlign(LEFT);
   textSize(30);
-  text('NST', 40, shiftY+marg+marg+5);
-  text('ST', 40, shiftY+(posY+marg)*3+marg+5);
-  text('ENG', 40, shiftY+(posY+marg)*7+marg+5);
+  text('NST', 700-2, shiftY+30);
+  text('ST', 700-2, shiftY+(posY+marg)*3+30);
+  text('ENG', 700-2, shiftY+(posY+marg)*7+30);
 
-  stroke(0);
-  strokeWeight(2);
-  line(120, shiftY+marg+marg, width, shiftY+marg+marg);
-  line(120, shiftY+(posY+marg)*3+marg, width, shiftY+(posY+marg)*3+marg);
-  line(120, shiftY+(posY+marg)*7+marg, width, shiftY+(posY+marg)*7+marg);
+  stroke(beige);
+  strokeWeight(1.5);
+  line(700, shiftY+marg, width-700, shiftY+marg);
+  line(700, shiftY+(posY+marg)*3+marg, width-700, shiftY+(posY+marg)*3+marg);
+  line(700, shiftY+(posY+marg)*7+marg, width-700, shiftY+(posY+marg)*7+marg);
+  
+  stroke(corneliRed);
+  line(width/2-130,90,width/2+130,90);
 }
 
 class Button {
@@ -61,8 +78,8 @@ class Button {
     this.y = y;
     this.txt = txt;
     this.url = url;
-    this.w = 300;
-    this.h = 40;
+    this.w = 260;
+    this.h = 50;
   }
 
   checkCursor() {
@@ -75,20 +92,26 @@ class Button {
 
   display() {
     push();
-    if (this.checkCursor()) {
-      fill(200);
-    } else {
-      fill(255);
-    }
-    stroke(0);
-    strokeWeight(2);
-    rect(this.x-this.w/2, this.y-this.h/2, this.w, this.h, 10);
 
+    strokeWeight(1.5);
     textAlign(CENTER, CENTER);
     textSize(17);
-    fill(0);
+    let s = 0;
+    if (this.checkCursor()) {
+      fill(lightBlue);
+      stroke(lightBlue);
+      rect(this.x-this.w/2, this.y-this.h/2, this.w, this.h, 18);
+      fill(eerieBlack);
+    } else {
+      stroke(beige);
+      fill(eerieBlack);
+      rect(this.x-this.w/2, this.y-this.h/2, this.w, this.h, 18);
+      fill(beige);
+    }
+
     noStroke();
-    text(this.txt, this.x, this.y);
+
+    text(this.txt, this.x, this.y-3);
     pop();
   }
 }
