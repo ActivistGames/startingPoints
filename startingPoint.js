@@ -235,7 +235,7 @@ class Button {
 
     noStroke();
 
-    text(this.txt, this.x, this.y-3);
+    text(this.txt, this.x, this.y-1);
     pop();
   }
 }
