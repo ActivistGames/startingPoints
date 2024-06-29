@@ -1,10 +1,10 @@
 let buttons = [];
 let particles = [];
 
-let posX = 400;
+let posX = 650;
 let posY = 50;
 let marg = 15;
-let shiftY = 280;
+let shiftY = 290;
 let lineW = 220;
 
 let over = 0;
@@ -102,7 +102,7 @@ function draw() {
 }
 
 function drawProjectInfo() {
-  let xOffset = 800; // Możesz dostosować tę wartość, aby zmienić położenie tekstu
+  let xOffset = 1050; // Możesz dostosować tę wartość, aby zmienić położenie tekstu
   let textBoxWidth = 510; // Szerokość obszaru tekstu
   let lineSpacing = 2; // Dodatkowy odstęp między liniami, możesz to dostosować
 
@@ -113,7 +113,7 @@ function drawProjectInfo() {
   textSize(20);
  
   
-  let yOffset = 140;
+  let yOffset = 150;
   let lineHeight = 18 + lineSpacing;
   
   function drawText(txt, x, y, maxWidth) {
