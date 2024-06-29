@@ -32,8 +32,8 @@ function setup() {
   eerieBlack = color(38, 38, 38);
   corneliRed = color(179, 0, 27);
 
-  buttons.push(new Button(posX, shiftY+posY+marg, 'Skrzynka z tajemnicami', ''));
-  buttons.push(new Button(posX, shiftY+(posY+marg)*2, 'Connect the dots', ''));
+  buttons.push(new Button(posX, shiftY+posY+marg, 'Skrzynka z tajemnicami', 'https://domciaioliwcia.github.io/Start-page'));
+  buttons.push(new Button(posX, shiftY+(posY+marg)*2, 'Connect the dots', 'https://juleczkasurwilka.github.io/swag'));
   buttons.push(new Button(posX, shiftY+(posY+marg)*4, '5 etapów żałoby', 'https://aszulcc.github.io/title-screen'));
   buttons.push(new Button(posX, shiftY+(posY+marg)*5, 'Dark patterns', 'https://glink-182.github.io/first-page'));
   buttons.push(new Button(posX, shiftY+(posY+marg)*6, 'Formularz imigracyjny', 'https://kacperrrrr5.github.io/imigrant-witamy'));
